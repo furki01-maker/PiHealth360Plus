@@ -9,7 +9,7 @@
   "scripts": {
     "start": "npm run build && node dist/index.js",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc"
+    "build": "npx tsc"
   },
   "dependencies": {
     "@types/connect-mongo": "^3.1.3",
