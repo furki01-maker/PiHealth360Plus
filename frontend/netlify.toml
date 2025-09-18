@@ -1,7 +1,0 @@
-[build]
-  publish = "frontend/build"
-  command = "npm run build"
-
-[context.production.environment]
-  NODE_OPTIONS = "--openssl-legacy-provider"
-  NODE_VERSION = "18"
