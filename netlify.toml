@@ -1,12 +1,18 @@
 [build]
-base = "frontend"
-publish = "frontend/build"
-command = "npm run build"
+  base = "frontend"
+  publish = "frontend/build"
+  command = "npm run build"
+  functions = "backend"  # backend klasörünü function olarak ekledik
 
 [build.environment]
-NODE_VERSION = "20"
-NPM_FLAGS = "--legacy-peer-deps"
-NODE_OPTIONS = "--openssl-legacy-provider"
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--legacy-peer-deps"
+  NODE_OPTIONS = "--openssl-legacy-provider"
 
 [context.production.environment]
-# production ortamına özel environment değişkenleri eklenebilir
+  # production ortamına özel environment değişkenleri eklenebilir
+
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200

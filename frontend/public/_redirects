@@ -1,1 +1,4 @@
-https://www.pihealth360.com/*  https://pihealth360.com/:splat  301!
+/validation-key.txt  /validation-key.txt  200
+/privacy  /privacy.html  200
+/terms    /terms.html    200
+/*       /index.html     200
