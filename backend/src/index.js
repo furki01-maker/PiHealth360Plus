@@ -1,0 +1,1 @@
+// Bu dosya iskelet olarak duruyor, server.js’de backend işlemleri yapılıyor

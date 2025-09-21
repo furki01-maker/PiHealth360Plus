@@ -20,11 +20,7 @@
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0"
   },
-  "resolutions": {
-    "lodash.isequal": "npm:util@0.12.5"
-  },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -52,7 +48,6 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "cross-env": "^10.0.0",
-    "npm-force-resolutions": "^0.0.10",
     "typescript": "^4.9.5"
   },
   "engines": {

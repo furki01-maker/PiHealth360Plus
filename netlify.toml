@@ -1,8 +1,8 @@
 [build]
-  base = "frontend"
+  base = "."
   publish = "frontend/build"
   command = "npm run build"
-  functions = "backend"  # backend klasörünü function olarak ekledik
+  functions = "frontend/backend"  # doğru path
 
 [build.environment]
   NODE_VERSION = "20"
