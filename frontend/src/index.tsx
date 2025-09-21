@@ -2,14 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
-// Pi SDK başlatma için TS global tanımı
+// Pi SDK başlatma
 declare global {
   interface Window {
     Pi: any;
   }
 }
 
-// SDK init
 if (window.Pi) {
   window.Pi.init({ version: "2.0", sandbox: true });
 }
