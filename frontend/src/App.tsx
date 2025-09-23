@@ -4,10 +4,12 @@ import PaymentButton from "./components/PaymentButton";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <h1>My React Editor</h1>
+    <div className="App" style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center", padding: "20px" }}>
+      <h1>My React Editor & Pi Payment</h1>
       <MyEditor />
-      <PaymentButton />
+      <div style={{ marginTop: "30px" }}>
+        <PaymentButton />
+      </div>
     </div>
   );
 };

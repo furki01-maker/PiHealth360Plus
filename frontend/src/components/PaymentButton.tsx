@@ -1,55 +1,68 @@
-import React from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
-declare const Pi: any; // Pi SDK global objesi
+interface PaymentButtonProps {
+  amount: number;
+  receiver: string; // Kullanıcının Pi cüzdan adresi
+  memo?: string;    // Opsiyonel açıklama
+  env?: "sandbox" | "production"; // Sandbox veya production
+}
 
-const PaymentButton: React.FC = () => {
-  const handlePayment = async () => {
+const PaymentButton: React.FC<PaymentButtonProps> = ({
+  amount,
+  receiver,
+  memo = "Health360+ Payment",
+  env = "sandbox",
+}) => {
+  const [loading, setLoading] = useState(false);
+
+  const startPayment = async () => {
+    setLoading(true);
     try {
-      // Backend’e ödeme isteği gönder
-      const response = await axios.post(
-        "https://pi-health360-plus-lcshboldc-furkan-yilmazs-projects-faf0f87a.vercel.app/create-payment",
-        {
-          amount: 1,
-          memo: "Health 360+ test ödemesi",
-        }
-      );
+      // Backend fonksiyonuna request gönder
+      const res = await fetch("/.netlify/functions/create-payment", {
+        method: "POST",
+        body: JSON.stringify({ amount, receiver, memo, env }),
+      });
 
-      console.log("Backend yanıtı:", response.data);
+      const data = await res.json();
 
-      // Pi SDK ödeme başlat
-      if (window.Pi) {
-        window.Pi.createPayment(
-          {
-            amount: 1,
-            memo: "Health 360+ test ödemesi",
-            metadata: { purpose: "sandbox-test" },
-          },
-          {
-            onReadyForServerApproval: (paymentId: string) => {
-              console.log("Ödeme başlatıldı:", paymentId);
-            },
-            onReadyForServerCompletion: (paymentId: string, txid: string) => {
-              console.log("Ödeme tamamlandı:", paymentId, txid);
-              alert("Ödeme başarıyla tamamlandı!");
-            },
-            onCancel: (paymentId: string) => {
-              console.log("Kullanıcı iptal etti:", paymentId);
-            },
-            onError: (error: any, paymentId: string) => {
-              console.error("Hata:", error, paymentId);
-            },
-          }
+      if (data.paymentId) {
+        alert(Ödeme ID: ${data.paymentId} oluştu! Cüzdan popup açılabilir.);
+
+        // Pi Wallet popup örneği (video mantığı)
+        // window.location.href yerine Pi SDK kullanımı olabilir
+        window.open(
+          https://sandbox.minepi.com/pay/${data.paymentId},
+          "_blank",
+          "width=500,height=700"
         );
       } else {
-        alert("Pi SDK yüklü değil!");
+        alert(Hata: ${data.error});
       }
-    } catch (error) {
-      console.error("Backend ödeme hatası:", error);
+    } catch (err) {
+      alert("Sunucu hatası: " + (err as Error).message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return <button onClick={handlePayment}>Test Payment</button>;
+  return (
+    <button
+      onClick={startPayment}
+      disabled={loading}
+      style={{
+        padding: "10px 20px",
+        fontSize: "16px",
+        borderRadius: "8px",
+        backgroundColor: "#4CAF50",
+        color: "white",
+        border: "none",
+        cursor: "pointer",
+      }}
+    >
+      {loading ? "Ödeme İşleniyor..." : Öde ${amount} Pi}
+    </button>
+  );
 };
 
 export default PaymentButton;

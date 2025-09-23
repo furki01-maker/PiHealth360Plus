@@ -10,11 +10,14 @@ const MyEditor = () => {
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: "800px", margin: "0 auto" }}>
       <ReactQuill value={value} onChange={handleChange} />
-      <div>
+      <div style={{ marginTop: "20px" }}>
         <h2>Preview:</h2>
-        <div dangerouslySetInnerHTML={{ __html: value }} />
+        <div
+          style={{ border: "1px solid #ccc", padding: "10px", minHeight: "100px" }}
+          dangerouslySetInnerHTML={{ __html: value }}
+        />
       </div>
     </div>
   );
