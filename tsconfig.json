@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    /* Temel Ayarlar */
+    "target": "es2020",            /* Node 18+ ile uyumlu */
+    "module": "commonjs",           /* Node.js için */
+    "outDir": "./build",            /* Derlenmiş dosyalar build/ klasörüne */
+    
+    /* Katı Tip Kontrolleri */
+    "strict": true,
+    "strictNullChecks": true,
+    
+    /* ES Module Uyumluluğu */
+    "esModuleInterop": true
+  }
+}
