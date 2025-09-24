@@ -8,8 +8,8 @@ export default function mountPaymentsEndpoints(router: Router) {
   router.post('/incomplete', async (req, res) => {
     const payment = req.body.payment;
     const paymentId = payment.identifier;
-    const txid = payment.transaction && payment.transaction.txid;
-    const txURL = payment.transaction && payment.transaction._link;
+    const txid = payment.transaction?.txid;
+    const txURL = payment.transaction?._link;
 
     /* 
       implement your logic here
