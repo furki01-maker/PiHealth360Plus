@@ -1,0 +1,11 @@
+version = 1
+
+[[analyzers]]
+name = "javascript"
+enabled = true
+paths = ["frontend/"]  # frontend klasörü
+
+[[analyzers]]
+name = "node"
+enabled = true
+paths = ["backend/"]   # backend klasörü
