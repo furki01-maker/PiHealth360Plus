@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
-// Pi SDK global objesi için TypeScript deklarasyonu
+// globals.d.ts veya index.tsx
 declare global {
   interface Window {
     Pi?: any;

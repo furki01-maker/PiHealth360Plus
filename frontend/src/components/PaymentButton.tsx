@@ -2,40 +2,49 @@ import React, { useState } from "react";
 
 interface PaymentButtonProps {
   amount: number;
-  receiver: string; // Kullanıcının Pi cüzdan adresi
-  memo?: string;    // Opsiyonel açıklama
-  env?: "sandbox" | "production"; // Sandbox veya production
+  receiver: string;
+  memo?: string;
 }
 
 const PaymentButton: React.FC<PaymentButtonProps> = ({
   amount,
   receiver,
   memo = "Health360+ Payment",
-  env = "sandbox",
 }) => {
   const [loading, setLoading] = useState(false);
 
   const startPayment = async () => {
     setLoading(true);
     try {
-      // Backend fonksiyonuna request gönder
-      const res = await fetch("/.netlify/functions/create-payment", {
+      // 🔹 Cloudflared tunnel URL
+      const backendUrl = "https://governance-aberdeen-guam-picked.trycloudflare.com";
+
+      // 1️⃣ Approve payment
+      const res = await fetch(${backendUrl}/approve_payment, {
         method: "POST",
-        body: JSON.stringify({ amount, receiver, memo, env }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount, receiver, memo }),
       });
 
       const data = await res.json();
 
       if (data.paymentId) {
-        alert(Ödeme ID: ${data.paymentId} oluştu! Cüzdan popup açılabilir.);
+        alert(Payment ID: ${data.paymentId});
 
-        // Pi Wallet popup örneği (video mantığı)
-        // window.location.href yerine Pi SDK kullanımı olabilir
+        // 2️⃣ Pi Wallet aç
+        const payUrl = "https://minepi.com/pay";
         window.open(
-          https://sandbox.minepi.com/pay/${data.paymentId},
+          ${payUrl}/${data.paymentId},
           "_blank",
           "width=500,height=700"
         );
+
+        // 3️⃣ Complete payment (opsiyonel: frontend tetikleyebilir)
+        await fetch(${backendUrl}/complete_payment, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ paymentId: data.paymentId, txid: "USER_TX_ID" }),
+        });
       } else {
         alert(Hata: ${data.error});
       }
