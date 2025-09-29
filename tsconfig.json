@@ -1,15 +1,13 @@
 {
   "compilerOptions": {
-    /* Temel Ayarlar */
-    "target": "es2020",            /* Node 18+ ile uyumlu */
-    "module": "commonjs",           /* Node.js için */
-    "outDir": "./build",            /* Derlenmiş dosyalar build/ klasörüne */
-    
-    /* Katı Tip Kontrolleri */
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "./dist",
     "strict": true,
-    "strictNullChecks": true,
-    
-    /* ES Module Uyumluluğu */
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": ["./src/types", "./node_modules/@types"],
+    "types": ["node", "express", "express-session", "cookie-parser"]
+  },
+  "include": ["src"]
 }

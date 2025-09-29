@@ -1,0 +1,21 @@
+# Node.js bağımlılıkları
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build klasörleri
+dist
+
+# Loglar
+log
+*.log
+
+# Ortam dosyaları
+.env
+
+# Git dosyaları
+.git
+.gitignore
+
+# MacOS veya diğer sistem dosyaları
+.DS_Store

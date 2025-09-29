@@ -1,82 +1,32 @@
-functionsDirectory = "C:\\Users\\acer\\Downloads\\pihealth360\\DemoMain\\frontend\\backend"
-functionsDirectoryOrigin = "config-v1"
-redirectsOrigin = "config"
-plugins = []
-headers = []
-
-[functions]
-
-[functions."*"]
-
 [build]
-publish = "C:\\Users\\acer\\Downloads\\pihealth360\\DemoMain\\frontend\\build"
-publishOrigin = "config"
-commandOrigin = "config"
-command = "npm run build"
-base = "C:\\Users\\acer\\Downloads\\pihealth360\\DemoMain"
-functions = "C:\\Users\\acer\\Downloads\\pihealth360\\DemoMain\\frontend\\backend"
+  publish = "frontend/build"
+  command = "npm run build"
+  functions = "frontend/backend"
 
 [build.environment]
-NODE_VERSION = "20"
-NPM_FLAGS = "--legacy-peer-deps"
-NODE_OPTIONS = "--openssl-legacy-provider"
-
-[build.processing]
-
-[build.processing.css]
-
-[build.processing.html]
-
-[build.processing.images]
-
-[build.processing.js]
-
-[build.services]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--legacy-peer-deps"
+  NODE_OPTIONS = "--openssl-legacy-provider"
 
 [[redirects]]
-from = "/validation-key.txt"
-to = "/validation-key.txt"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
+  from = "/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
 
 [[redirects]]
-from = "/privacy"
-to = "/privacy.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
 
 [[redirects]]
-from = "/terms"
-to = "/terms.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+  force = false
 
 [[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+  force = false
