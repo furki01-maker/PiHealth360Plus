@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for pihealth360-backend-red-sea-9774 on 2025-09-28T14:50:18+03:00
+# fly.toml app configuration file generated for pihealth360-backend-v2 on 2025-09-28T14:50:18+03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'pihealth360-backend-red-sea-9774'
+app = 'pihealth360-backend-v2'
 primary_region = 'fra'
 
 [build]
