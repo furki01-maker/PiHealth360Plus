@@ -1,36 +1,37 @@
-const express = require(`express`);
+// src/handlers/payments.js
+const express = require('express');
 const router = express.Router();
-const paymentService = require(`../services/paymentService`);
+const paymentService = require('../services/paymentService'); // Önemli: doğru yol
 
-// Ödeme oluşturma
-router.post(`/create-payment`, async (req, res) => {
+// Örnek: ödeme oluşturma
+router.post('/create', async (req, res) => {
   const { amount, memo, metadata } = req.body;
   try {
     const payment = await paymentService.createPayment(amount, memo, metadata);
     res.json(payment);
   } catch (err) {
-    res.status(500).json({ error: "Payment creation failed" });
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Ödeme tamamlama
-router.post(/complete-payment, async (req, res) => {
-  const { paymentId } = req.body;
+// Örnek: ödemeyi tamamlama
+router.get('/complete/:id', async (req, res) => {
+  const paymentId = req.params.id;
   try {
-    const result = await paymentService.completePayment(paymentId);
-    res.json(result);
+    const payment = await paymentService.completePayment(paymentId);
+    res.json(payment);
   } catch (err) {
-    res.status(500).json({ error: "Payment completion failed" });
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Devam eden ödemeleri kontrol etme
-router.get("/incomplete-payments", async (req, res) => {
+// Örnek: tamamlanmamış server ödemelerini alma
+router.get('/incomplete', async (req, res) => {
   try {
     const payments = await paymentService.getIncompleteServerPayments();
     res.json(payments);
   } catch (err) {
-    res.status(500).json({ error: "Fetching incomplete payments failed" });
+    res.status(500).json({ error: err.message });
   }
 });
 
