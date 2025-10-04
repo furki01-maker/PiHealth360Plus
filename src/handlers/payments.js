@@ -1,7 +1,7 @@
 // src/handlers/payments.js
 const express = require('express');
 const router = express.Router();
-const paymentService = require('../services/paymentService'); // Önemli: doğru yol
+const paymentService = require('../services/paymentService.js'); // Önemli: doğru yol
 
 // Örnek: ödeme oluşturma
 router.post('/create', async (req, res) => {
