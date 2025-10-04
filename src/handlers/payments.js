@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require(`express`);
 const router = express.Router();
-const paymentService = require("../services/PaymentService");
+const paymentService = require(`../services/paymentService`);
 
 // Ödeme oluşturma
-router.post("/create-payment", async (req, res) => {
+router.post(`/create-payment`, async (req, res) => {
   const { amount, memo, metadata } = req.body;
   try {
     const payment = await paymentService.createPayment(amount, memo, metadata);
@@ -14,7 +14,7 @@ router.post("/create-payment", async (req, res) => {
 });
 
 // Ödeme tamamlama
-router.post("/complete-payment", async (req, res) => {
+router.post(/complete-payment, async (req, res) => {
   const { paymentId } = req.body;
   try {
     const result = await paymentService.completePayment(paymentId);
