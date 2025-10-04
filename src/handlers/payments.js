@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const paymentService = require("./services/paymentService");
+const paymentService = require("./services/PaymentService");
 
 // Ödeme oluşturma
 router.post("/create-payment", async (req, res) => {
